@@ -1,0 +1,636 @@
+{
+	"info": {
+		"_postman_id": "fastrest-collection",
+		"name": "FastREST API",
+		"description": "Complete test collection for FastREST framework",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		},
+		{
+			"key": "basicAuthUsername",
+			"value": "admin"
+		},
+		{
+			"key": "basicAuthPassword",
+			"value": "password123"
+		},
+		{
+			"key": "bearerToken",
+			"value": "secret-token-123"
+		},
+		{
+			"key": "apiKey",
+			"value": "api-key-xyz"
+		}
+	],
+	"item": [
+		{
+			"name": "Public Endpoints",
+			"item": [
+				{
+					"name": "Root",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/",
+							"host": ["{{baseUrl}}"],
+							"path": [""]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ping",
+							"host": ["{{baseUrl}}"],
+							"path": ["ping"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "External Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/external/info",
+							"host": ["{{baseUrl}}"],
+							"path": ["external", "info"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/health",
+							"host": ["{{baseUrl}}"],
+							"path": ["health"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Liveness Probe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/health/live",
+							"host": ["{{baseUrl}}"],
+							"path": ["health", "live"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Readiness Probe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/health/ready",
+							"host": ["{{baseUrl}}"],
+							"path": ["health", "ready"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users API",
+			"item": [
+				{
+					"name": "List All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["users"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["users", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"New User\",\n    \"email\": \"newuser@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["users"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User (PUT)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Updated User\",\n    \"email\": \"updated@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["users", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Partial Update User (PATCH)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"patched@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["users", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["users", "1"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Basic Auth",
+			"item": [
+				{
+					"name": "Profile (Valid - admin)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "string"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/basic/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "basic", "profile"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile (Valid - user)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "user123",
+									"type": "string"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/basic/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "basic", "profile"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile (Invalid Credentials)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "wrong",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "wrong",
+									"type": "string"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/basic/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "basic", "profile"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile (No Auth)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/basic/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "basic", "profile"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bearer Auth",
+			"item": [
+				{
+					"name": "Profile (Valid Token)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "secret-token-123",
+									"type": "string"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/bearer/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "bearer", "profile"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile (Another Valid Token)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "another-token",
+									"type": "string"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/bearer/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "bearer", "profile"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile (Invalid Token)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "invalid-token",
+									"type": "string"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/bearer/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "bearer", "profile"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile (No Token)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/bearer/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "bearer", "profile"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API Key Auth",
+			"item": [
+				{
+					"name": "Profile (Valid API Key)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "api-key-xyz"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/auth/apikey/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "apikey", "profile"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile (Another Valid API Key)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "api-key-testing"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/auth/apikey/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "apikey", "profile"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile (Invalid API Key)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "wrong-key"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/auth/apikey/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "apikey", "profile"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile (No API Key)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/apikey/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "apikey", "profile"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Combined Auth",
+			"item": [
+				{
+					"name": "Profile (With Basic Auth)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "string"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/any/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "any", "profile"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile (With Bearer Token)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "secret-token-123",
+									"type": "string"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/any/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "any", "profile"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile (With API Key)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "api-key-xyz"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/auth/any/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "any", "profile"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Metrics",
+			"item": [
+				{
+					"name": "Prometheus Format",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/metrics",
+							"host": ["{{baseUrl}}"],
+							"path": ["metrics"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "JSON Format",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/metrics/json",
+							"host": ["{{baseUrl}}"],
+							"path": ["metrics", "json"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Error Cases",
+			"item": [
+				{
+					"name": "404 Not Found",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/notfound",
+							"host": ["{{baseUrl}}"],
+							"path": ["notfound"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "400 Bad Request (Invalid JSON)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "invalid json"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["users"]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
